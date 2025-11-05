@@ -1,5 +1,13 @@
 import React from "react";
+import { useState } from "react";
+import Modal from "./Modal";
 export default function NavBar(props) {
+
+    const [isOpen,setIsOpen]=useState(false)
+
+    const checkLogin=()=>{
+        setIsOpen(true)
+    }
     
 
     return (
@@ -20,12 +28,13 @@ export default function NavBar(props) {
                  <li>
                     My Recipe
                 </li>
-                 <li>
+                 <li onClick={checkLogin}>
                    Login
                 </li>
             </ul>
             
         </header>
+        {isOpen && <Modal onClose={()=>setIsOpen(false)}/>}
         </>
     );
 }
