@@ -5,15 +5,30 @@ export default function AddFoodRecipe() {
     const [recipeData,setRecipeData]=useState({});
 
     const navigate=useNavigate()
+const onHandleChange = (e) => {
 
-    const onHandleChange=(e)=>{
-        let val=(e.target.name==="ingredients")?e.target.value.split(","):e.target.value
-        setRecipeData(pre=>({...pre,[e.target.name]:val}))
+    let val;
+    console.log(e.data)
+
+    if (e.target.name === "ingredients") {
+        val = e.target.value.split(",");
+    } else if (e.target.name === "file") {
+        val = e.target.files && e.target.files.length > 0 ? e.target.files[0] : null;
+    } else {
+        val = e.target.value;
     }
+
+    setRecipeData(prev => ({ ...prev, [e.target.name]: val }));
+};
+
     const onHandleSubmit=async(e)=>{
         e.preventDefault()
         console.log(recipeData)
-        await axios.post("/recipe",recipeData)
+        await axios.post("/recipe",recipeData,{
+            headers:{
+                "Content-Type":"multipart/form-data"
+            }
+        })
         .then(()=>{
             navigate("/")
         })
