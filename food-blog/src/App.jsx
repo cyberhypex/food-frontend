@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import api from './axios';
 import Home from './Pages/Home';
+import AddFoodRecipe from './Pages/AddFoodRecipe';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainNavigation from './components/MainNavigation';
 
@@ -29,7 +30,12 @@ const router = createBrowserRouter([
   {
     path:"/favRecipe",
     element:<Home />
+  },
+  {
+    path:"/addRecipe",
+    element:<AddFoodRecipe />
   }
+  
     ]
   },
   
